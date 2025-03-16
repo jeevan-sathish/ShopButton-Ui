@@ -18,7 +18,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              A premium collection of stylish, reusable buttons for modern web applications.
+              A premium collection of stylish, reusable buttons for modern web applications using ReactJs.
             </p>
           </div>
 
