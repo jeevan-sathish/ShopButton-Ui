@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -6,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Copy, Check, Code, ChevronUp, ChevronDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// Define button data interface
 interface ButtonData {
   id: string;
   title: string;
@@ -16,9 +14,7 @@ interface ButtonData {
   category: string;
 }
 
-// Sample button data for each category
 const buttonData: ButtonData[] = [
-  // Plain Buttons
   {
     id: "plain-default",
     title: "Default Button",
@@ -99,7 +95,6 @@ const buttonData: ButtonData[] = [
     code: `<Button disabled>Disabled Button</Button>`,
     category: "plain"
   },
-  // Colorful Buttons
   {
     id: "colorful-destructive",
     title: "Destructive Button",
@@ -180,7 +175,6 @@ const buttonData: ButtonData[] = [
     code: `<Button variant="outline" className="border-pink-500 text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-950">Pink Outline</Button>`,
     category: "colorful"
   },
-  // Animated Buttons
   {
     id: "animated-hover",
     title: "Hover Animation",
@@ -267,7 +261,6 @@ const buttonData: ButtonData[] = [
     code: `<Button className="group">Settings <svg className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></Button>`,
     category: "animated"
   },
-  // Neon Buttons
   {
     id: "neon-glow",
     title: "Neon Glow",
@@ -358,24 +351,20 @@ const Buttons = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedCodeId, setExpandedCodeId] = useState<string | null>(null);
 
-  // Handle category change and update URL
   useEffect(() => {
     if (category !== selectedCategory) {
       navigate(`/buttons/${selectedCategory}`);
     }
   }, [selectedCategory, navigate, category]);
   
-  // Reset category from URL params when it changes
   useEffect(() => {
     if (category) {
       setSelectedCategory(category);
     }
   }, [category]);
 
-  // Filter buttons by selected category
   const filteredButtons = buttonData.filter(button => button.category === selectedCategory);
 
-  // Handle copy code function
   const handleCopyCode = (code: string, id: string) => {
     navigator.clipboard.writeText(code);
     setCopiedId(id);
@@ -386,7 +375,6 @@ const Buttons = () => {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  // Toggle code view
   const toggleCodeView = (id: string) => {
     setExpandedCodeId(expandedCodeId === id ? null : id);
   };
@@ -399,9 +387,8 @@ const Buttons = () => {
       </p>
       
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Sidebar */}
         <aside className="w-full md:w-64 flex-shrink-0">
-          <div className="sticky top-20 border rounded-lg p-4">
+          <div className="sticky top-20 border rounded-lg p-4 bg-background/95 backdrop-blur-sm">
             <h3 className="font-medium mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
@@ -440,11 +427,10 @@ const Buttons = () => {
           </div>
         </aside>
         
-        {/* Main content area - Button cards */}
         <div className="flex-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredButtons.map((button) => (
-              <Card key={button.id} className="flex flex-col">
+              <Card key={button.id} className="flex flex-col overflow-hidden">
                 <CardHeader>
                   <CardTitle>{button.title}</CardTitle>
                   <CardDescription>{button.description}</CardDescription>
@@ -459,11 +445,12 @@ const Buttons = () => {
                     <pre className="text-sm text-foreground"><code>{button.code}</code></pre>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-between gap-2 p-6">
+                <CardFooter className="flex flex-wrap sm:flex-nowrap justify-between gap-2 p-4 sm:p-6">
                   <Button 
                     variant="outline" 
                     onClick={() => toggleCodeView(button.id)}
-                    className="flex-1"
+                    className="w-full sm:flex-1"
+                    size="sm"
                   >
                     <Code className="mr-2 h-4 w-4" />
                     {expandedCodeId === button.id ? (
@@ -481,7 +468,8 @@ const Buttons = () => {
                   <Button
                     variant="secondary"
                     onClick={() => handleCopyCode(button.code, button.id)}
-                    className="flex-1"
+                    className="w-full sm:flex-1"
+                    size="sm"
                   >
                     {copiedId === button.id ? (
                       <>
