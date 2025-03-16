@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -380,7 +381,7 @@ const Buttons = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 pt-28 pb-8">
       <h1 className="text-3xl font-bold mb-6">Button Collection</h1>
       <p className="text-muted-foreground mb-8">
         Browse our collection of beautiful button styles. Select a category from the sidebar.
@@ -388,7 +389,7 @@ const Buttons = () => {
       
       <div className="flex flex-col md:flex-row gap-8">
         <aside className="w-full md:w-64 flex-shrink-0">
-          <div className="sticky top-20 border rounded-lg p-4 bg-background/95 backdrop-blur-sm">
+          <div className="sticky top-28 border rounded-lg p-4 bg-background/95 backdrop-blur-sm">
             <h3 className="font-medium mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
@@ -445,41 +446,41 @@ const Buttons = () => {
                     <pre className="text-sm text-foreground"><code>{button.code}</code></pre>
                   </div>
                 </CardContent>
-                <CardFooter className="flex flex-wrap sm:flex-nowrap justify-between gap-2 p-4 sm:p-6">
+                <CardFooter className="flex flex-wrap justify-between gap-2 p-4 sm:p-6">
                   <Button 
                     variant="outline" 
                     onClick={() => toggleCodeView(button.id)}
-                    className="w-full sm:flex-1"
+                    className="w-full sm:w-auto sm:flex-1"
                     size="sm"
                   >
                     <Code className="mr-2 h-4 w-4" />
                     {expandedCodeId === button.id ? (
                       <>
-                        <ChevronUp className="mr-2 h-4 w-4" />
-                        Hide Code
+                        <span className="mr-1">Hide Code</span>
+                        <ChevronUp className="h-4 w-4" />
                       </>
                     ) : (
                       <>
-                        <ChevronDown className="mr-2 h-4 w-4" />
-                        View Code
+                        <span className="mr-1">View Code</span>
+                        <ChevronDown className="h-4 w-4" />
                       </>
                     )}
                   </Button>
                   <Button
                     variant="secondary"
                     onClick={() => handleCopyCode(button.code, button.id)}
-                    className="w-full sm:flex-1"
+                    className="w-full sm:w-auto sm:flex-1"
                     size="sm"
                   >
                     {copiedId === button.id ? (
                       <>
                         <Check className="mr-2 h-4 w-4" />
-                        Copied
+                        <span>Copied</span>
                       </>
                     ) : (
                       <>
                         <Copy className="mr-2 h-4 w-4" />
-                        Copy
+                        <span>Copy</span>
                       </>
                     )}
                   </Button>
